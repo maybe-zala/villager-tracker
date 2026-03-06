@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Island Form</title>
+  <link rel="stylesheet" th:href="@{/style.css}">
+</head>
+<body>
+<h1>Island Form</h1>
+
+<form th:action="@{/islands}" method="post" th:object="${island}">
+  <input type="hidden" th:field="*{id}">
+
+  <label>Name:</label>
+  <input type="text" th:field="*{name}" required>
+
+  <label>Description:</label>
+  <textarea th:field="*{description}" required></textarea>
+
+  <button type="submit">Save</button>
+  <a href="/islands">Cancel</a>
+</form>
+</body>
+</html>

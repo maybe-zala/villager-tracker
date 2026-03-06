@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Villagers</title>
+    <link rel="stylesheet" th:href="@{/style.css}">
+</head>
+<body>
+<h1>All Villagers</h1>
+
+<a href="/villagers/new">Add New Villager</a>
+
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Gender</th>
+        <th>Personality</th>
+        <th>Species</th>
+        <th>Birthday</th>
+        <th>Favorite Color</th>
+        <th>Actions</th>
+    </tr>
+    <tr th:each="villager : ${villagers}">
+        <td th:text="${villager.id}"></td>
+        <td th:text="${villager.name}"></td>
+        <td th:text="${villager.gender}"></td>
+        <td th:text="${villager.personality}"></td>
+        <td th:text="${villager.species}"></td>
+        <td th:text="${villager.birthday}"></td>
+        <td th:text="${villager.favoriteColor}"></td>
+        <td>
+            <a th:href="@{/villagers/{id}(id=${villager.id})}">View</a>
+            <a th:href="@{/villagers/{id}/edit(id=${villager.id})}">Edit</a>
+            <form th:action="@{/villagers/{id}/delete(id=${villager.id})}" method="post" style="display:inline;">
+                <button type="submit">Delete</button>
+            </form>
+        </td>
+    </tr>
+</table>
+</body>
+</htm

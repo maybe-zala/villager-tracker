@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Custom </title>
+    <link rel="stylesheet" th:href="@{style.css}">
+</head>
+<body>
+<h1> Custom Page </h1>
+<p>hello everyone!</p>
+<p th:text = "${message}"></p>
+<a th:href="@{/}">back to home</a>
+</body>
+</html>
