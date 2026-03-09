@@ -1,10 +1,41 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <title>Islands</title>
+    <link rel="stylesheet" th:href="@{/style.css}" />
 </head>
 <body>
-$END$
+<div class="container">
+    <h1>All Islands</h1>
+
+    <a href="/islands/new" class="add-button">Add New Island</a>
+
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Actions</th>
+        </tr>
+        <tr th:each="island : ${islands}">
+            <td th:text="${island.id}"></td>
+            <td th:text="${island.name}"></td>
+            <td th:text="${island.description}"></td>
+            <td>
+                <a th:href="@{/islands/{id}(id=${island.id})}" class="table">View</a>
+                <a th:href="@{/islands/{id}/edit(id=${island.id})}" class="table">Edit</a>
+                <form th:action="@{/islands/{id}/delete(id=${island.id})}" method="post" style="display:inline;">
+                    <button type="submit">Delete</button>
+                </form>
+            </td>
+        </tr>
+    </table>
+
+    <div class="page-nav">
+        <a class="nav-btn" href="/villagers">Villagers</a>
+        <a class="nav-btn" href="/islands">Islands</a>
+        <a class="nav-btn" href="/hobbies">Hobbies</a>
+    </div>
+</div>
 </body>
 </html>

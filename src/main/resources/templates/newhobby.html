@@ -1,10 +1,46 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <title th:text="${hobby.id == null ? 'New Hobby' : 'Edit Hobby'}">Hobby</title>
+    <link rel="stylesheet" th:href="@{/style.css}" />
 </head>
 <body>
-$END$
+<div class="container">
+    <h1 th:text="${hobby.id == null ? 'New Hobby' : 'Edit Hobby'}">Hobby</h1>
+
+    <form th:if="${hobby.id == null}" th:action="@{/hobbies}" method="post" th:object="${hobby}">
+        <input type="hidden" th:field="*{id}">
+
+        <div class="villager-input">
+            <div class="villager-input-item">
+                <label class="text">Name:</label>
+                <input type="text" th:field="*{name}" required>
+            </div>
+        </div>
+
+        <button type="submit" th:text="${hobby.id == null ? 'Save' : 'Update'}">Save</button>
+        <a href="/hobbies">Cancel</a>
+    </form>
+
+    <form th:if="${hobby.id != null}" th:action="@{/hobbies/{id}/edit(id=${hobby.id})}" method="post" th:object="${hobby}">
+        <input type="hidden" th:field="*{id}">
+
+        <div class="villager-input">
+            <div class="villager-input-item">
+                <label class="text">Name:</label>
+                <input type="text" th:field="*{name}" required>
+            </div>
+        </div>
+
+        <button type="submit" th:text="${hobby.id == null ? 'Save' : 'Update'}">Save</button>
+        <a href="/hobbies">Cancel</a>
+    </form>
+
+    <div class="page-nav">
+        <a class="nav-btn" href="/villagers">Villagers</a>
+        <a class="nav-btn" href="/islands">Islands</a>
+        <a class="nav-btn" href="/hobbies">Hobbies</a>
+    </div>
+</div>
 </body>
 </html>

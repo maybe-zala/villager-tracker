@@ -1,14 +1,64 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Custom </title>
-    <link rel="stylesheet" th:href="@{style.css}">
+    <title>Villager Detail</title>
+    <link rel="stylesheet" th:href="@{/style.css}" />
 </head>
 <body>
-<h1> Custom Page </h1>
-<p>hello everyone!</p>
-<p th:text = "${message}"></p>
-<a th:href="@{/}">back to home</a>
+<div class="detail-container">
+    <h1 class="detail-title" th:text="${villager != null ? villager.name : 'Villager'}">Villager</h1>
+
+    <div th:if="${villager != null}">
+        <div class="detail-grid">
+            <div class="detail-row">
+                <span class="detail-label">ID:</span>
+                <span th:text="${villager.id}"></span>
+            </div>
+            <div class="detail-row">
+                <span class="detail-label">Gender:</span>
+                <span th:text="${villager.gender}"></span>
+            </div>
+            <div class="detail-row">
+                <span class="detail-label">Personality:</span>
+                <span th:text="${villager.personality}"></span>
+            </div>
+            <div class="detail-row">
+                <span class="detail-label">Species:</span>
+                <span th:text="${villager.species}"></span>
+            </div>
+            <div class="detail-row">
+                <span class="detail-label">Birthday:</span>
+                <span th:text="${villager.birthday}"></span>
+            </div>
+            <div class="detail-row">
+                <span class="detail-label">Favorite Color:</span>
+                <span th:text="${villager.favoriteColor}"></span>
+            </div>
+        </div>
+
+        <div class="detail-block">
+            <div class="detail-label">Islands</div>
+            <div class="chip-list" th:if="${villager.islands != null and !villager.islands.isEmpty()}">
+                <span class="chip" th:each="island : ${villager.islands}" th:text="${island.name}"></span>
+            </div>
+            <div class="detail-row" th:if="${villager.islands == null or villager.islands.isEmpty()}">None</div>
+        </div>
+
+        <div class="detail-block">
+            <div class="detail-row">
+                <span class="detail-label">Hobby:</span>
+                <span th:text="${villager.hobby != null ? villager.hobby.name : 'None'}"></span>
+            </div>
+        </div>
+    </div>
+
+    <div th:if="${villager == null}" class="detail-row">Villager not found.</div>
+
+    <div class="page-nav">
+        <a class="nav-btn" href="/villagers">Villagers</a>
+        <a class="nav-btn" href="/islands">Islands</a>
+        <a class="nav-btn" href="/hobbies">Hobbies</a>
+    </div>
+</div>
 </body>
 </html>

@@ -1,10 +1,111 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <title>Villager Form</title>
+    <link rel="stylesheet" th:href="@{/style.css}" />
 </head>
 <body>
-$END$
+
+<div class="container">
+    <h1 th:text="${villager.id == null ? 'New Villager' : 'Edit Villager'}">Villager Form</h1>
+
+    <form th:if="${villager.id == null}" th:action="@{/villagers}" method="post" th:object="${villager}">
+        <input type="hidden" th:field="*{id}">
+
+        <div class="villager-input">
+            <div class="villager-input-item">
+                <label class="text">Name:</label>
+                <input type="text" th:field="*{name}" required>
+            </div>
+            <div class="villager-input-item">
+                <label class="text">Gender:</label>
+                <input type="text" th:field="*{gender}" required>
+            </div>
+            <div class="villager-input-item">
+                <label class="text">Personality:</label>
+                <input type="text" th:field="*{personality}" required>
+            </div>
+            <div class="villager-input-item">
+                <label class="text">Species:</label>
+                <input type="text" th:field="*{species}" required>
+            </div>
+            <div class="villager-input-item">
+                <label class="text">Birthday:</label>
+                <input type="text" th:field="*{birthday}" required>
+            </div>
+            <div class="villager-input-item">
+                <label class="text">Favorite Color:</label>
+                <input type="text" th:field="*{favoriteColor}" required>
+            </div>
+        </div>
+
+        <label class="text">Islands:</label>
+        <div class="island-grid">
+            <div class="island-item" th:each="island : ${islands}">
+                <input type="checkbox" th:field="*{islands}" th:value="${island.id}" />
+                <label th:text="${island.name}"></label>
+            </div>
+        </div>
+
+        <label class="text">Hobby:</label>
+        <select th:field="*{hobby}">
+            <option value="">-- Select a Hobby --</option>
+            <option th:each="hobby : ${hobbies}" th:value="${hobby.id}" th:text="${hobby.name}"></option>
+        </select>
+
+        <br>
+        <button type="submit" th:text="${villager.id == null ? 'Save' : 'Update'}">Save</button>
+        <a href="/villagers">Cancel</a>
+    </form>
+
+    <form th:if="${villager.id != null}" th:action="@{/villagers/{id}/edit(id=${villager.id})}" method="post" th:object="${villager}">
+        <input type="hidden" th:field="*{id}">
+
+        <div class="villager-input">
+            <div class="villager-input-item">
+                <label class="text">Name:</label>
+                <input type="text" th:field="*{name}" required>
+            </div>
+            <div class="villager-input-item">
+                <label class="text">Gender:</label>
+                <input type="text" th:field="*{gender}" required>
+            </div>
+            <div class="villager-input-item">
+                <label class="text">Personality:</label>
+                <input type="text" th:field="*{personality}" required>
+            </div>
+            <div class="villager-input-item">
+                <label class="text">Species:</label>
+                <input type="text" th:field="*{species}" required>
+            </div>
+            <div class="villager-input-item">
+                <label class="text">Birthday:</label>
+                <input type="text" th:field="*{birthday}" required>
+            </div>
+            <div class="villager-input-item">
+                <label class="text">Favorite Color:</label>
+                <input type="text" th:field="*{favoriteColor}" required>
+            </div>
+        </div>
+
+        <label class="text">Islands:</label>
+        <div class="island-grid">
+            <div class="island-item" th:each="island : ${islands}">
+                <input type="checkbox" th:field="*{islands}" th:value="${island.id}" />
+                <label th:text="${island.name}"></label>
+            </div>
+        </div>
+
+        <label class="text">Hobby:</label>
+        <select th:field="*{hobby}">
+            <option value="">-- Select a Hobby --</option>
+            <option th:each="hobby : ${hobbies}" th:value="${hobby.id}" th:text="${hobby.name}"></option>
+        </select>
+
+        <br>
+        <button type="submit" th:text="${villager.id == null ? 'Save' : 'Update'}">Save</button>
+        <a href="/villagers">Cancel</a>
+    </form>
+</div>
 </body>
 </html>

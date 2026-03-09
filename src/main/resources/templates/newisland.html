@@ -1,23 +1,54 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <title>Island Form</title>
-  <link rel="stylesheet" th:href="@{/style.css}">
+  <title th:text="${island.id == null ? 'New Island' : 'Edit Island'}">Island</title>
+  <link rel="stylesheet" th:href="@{/style.css}" />
 </head>
 <body>
-<h1>Island Form</h1>
+<div class="container">
+  <h1 th:text="${island.id == null ? 'New Island' : 'Edit Island'}">Island</h1>
 
-<form th:action="@{/islands}" method="post" th:object="${island}">
-  <input type="hidden" th:field="*{id}">
+  <form th:if="${island.id == null}" th:action="@{/islands}" method="post" th:object="${island}">
+    <input type="hidden" th:field="*{id}">
 
-  <label>Name:</label>
-  <input type="text" th:field="*{name}" required>
+    <div class="villager-input">
+      <div class="villager-input-item">
+        <label class="text">Name:</label>
+        <input type="text" th:field="*{name}" required>
+      </div>
+      <div class="villager-input-item">
+        <label class="text">Description:</label>
+        <input type="text" th:field="*{description}" required>
+      </div>
+    </div>
 
-  <label>Description:</label>
-  <textarea th:field="*{description}" required></textarea>
+    <button type="submit" th:text="${island.id == null ? 'Save' : 'Update'}">Save</button>
+    <a href="/islands">Cancel</a>
+  </form>
 
-  <button type="submit">Save</button>
-  <a href="/islands">Cancel</a>
-</form>
+  <form th:if="${island.id != null}" th:action="@{/islands/{id}/edit(id=${island.id})}" method="post" th:object="${island}">
+    <input type="hidden" th:field="*{id}">
+
+    <div class="villager-input">
+      <div class="villager-input-item">
+        <label class="text">Name:</label>
+        <input type="text" th:field="*{name}" required>
+      </div>
+      <div class="villager-input-item">
+        <label class="text">Description:</label>
+        <input type="text" th:field="*{description}" required>
+      </div>
+    </div>
+
+    <button type="submit" th:text="${island.id == null ? 'Save' : 'Update'}">Save</button>
+    <a href="/islands">Cancel</a>
+  </form>
+
+  <div class="page-nav">
+    <a class="nav-btn" href="/villagers">Villagers</a>
+    <a class="nav-btn" href="/islands">Islands</a>
+    <a class="nav-btn" href="/hobbies">Hobbies</a>
+  </div>
+</div>
 </body>
 </html>

@@ -1,10 +1,36 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+  <title>Island Detail</title>
+  <link rel="stylesheet" th:href="@{/style.css}" />
 </head>
 <body>
-$END$
+<div class="detail-container">
+  <h1 class="detail-title" th:text="${island.name}">Island</h1>
+
+  <div class="detail-grid">
+    <div class="detail-row">
+      <span class="detail-label">ID:</span>
+      <span th:text="${island.id}"></span>
+    </div>
+    <div class="detail-row">
+      <span class="detail-label">Name:</span>
+      <span th:text="${island.name}"></span>
+    </div>
+  </div>
+
+  <div class="detail-block">
+    <div class="detail-row">
+      <span class="detail-label">Description:</span>
+      <span th:text="${island.description != null and !#strings.isEmpty(island.description) ? island.description : 'None'}"></span>
+    </div>
+  </div>
+
+  <div class="page-nav">
+    <a class="nav-btn" href="/villagers">Villagers</a>
+    <a class="nav-btn" href="/islands">Islands</a>
+    <a class="nav-btn" href="/hobbies">Hobbies</a>
+  </div>
+</div>
 </body>
 </html>

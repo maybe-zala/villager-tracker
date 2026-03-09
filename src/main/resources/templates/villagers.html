@@ -2,40 +2,47 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Villagers</title>
-    <link rel="stylesheet" th:href="@{/style.css}">
+    <link rel="stylesheet" th:href="@{/style.css}" />
 </head>
 <body>
-<h1>All Villagers</h1>
+<div class="container">
+    <h1>All Villagers</h1>
 
-<a href="/villagers/new">Add New Villager</a>
+    <a href="/villagers/new" class="add-button">Add New Villager</a>
 
-<table>
-    <tr>
-        <th>ID</th>
-        <th>Name</th>
-        <th>Gender</th>
-        <th>Personality</th>
-        <th>Species</th>
-        <th>Birthday</th>
-        <th>Favorite Color</th>
-        <th>Actions</th>
-    </tr>
-    <tr th:each="villager : ${villagers}">
-        <td th:text="${villager.id}"></td>
-        <td th:text="${villager.name}"></td>
-        <td th:text="${villager.gender}"></td>
-        <td th:text="${villager.personality}"></td>
-        <td th:text="${villager.species}"></td>
-        <td th:text="${villager.birthday}"></td>
-        <td th:text="${villager.favoriteColor}"></td>
-        <td>
-            <a th:href="@{/villagers/{id}(id=${villager.id})}">View</a>
-            <a th:href="@{/villagers/{id}/edit(id=${villager.id})}">Edit</a>
-            <form th:action="@{/villagers/{id}/delete(id=${villager.id})}" method="post" style="display:inline;">
-                <button type="submit">Delete</button>
-            </form>
-        </td>
-    </tr>
-</table>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Gender</th>
+            <th>Personality</th>
+            <th>Species</th>
+            <th>Birthday</th>
+            <th>Favorite Color</th>
+            <th>Actions</th>
+        </tr>
+        <tr th:each="villager : ${villagers}">
+            <td th:text="${villager.id}"></td>
+            <td th:text="${villager.name}"></td>
+            <td th:text="${villager.gender}"></td>
+            <td th:text="${villager.personality}"></td>
+            <td th:text="${villager.species}"></td>
+            <td th:text="${villager.birthday}"></td>
+            <td th:text="${villager.favoriteColor}"></td>
+            <td>
+                <a th:href="@{/villagers/{id}(id=${villager.id})}" class="action-link">View</a>
+                <a th:href="@{/villagers/{id}/edit(id=${villager.id})}" class="action-link">Edit</a>
+                <form th:action="@{/villagers/{id}/delete(id=${villager.id})}" method="post" style="display:inline;">
+                    <button type="submit">Delete</button>
+                </form>
+            </td>
+        </tr>
+    </table>
+    <div class="page-nav">
+        <a class="nav-btn" href="/villagers">Villagers</a>
+        <a class="nav-btn" href="/islands">Islands</a>
+        <a class="nav-btn" href="/hobbies">Hobbies</a>
+    </div>
+</div>
 </body>
-</htm
+</html>
